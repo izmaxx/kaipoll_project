@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="container col-lg-8 align-items-center flex-column" style="padding-top: 50px">
+{% if already_visited %}
+
+
+<p class ="alert alert-warning">
+	<strong>You've already voted today mate, let's do it again tomorrow</strong>
+</p>
+{% endif %}
 <h1 class ="mb-5 text-center">{{ question.question_text }}</h1>
 
 <ul class ="list-group mb-5">
@@ -11,7 +19,6 @@
 	{% endfor %}
 </ul>
 
-<a class ="btn btn-secondary" href ="{% url 'polls:index' %}">Back To Polls</a>
-<a class ="btn btn-dark" href ="{% url 'polls:detail' question.id %}">Vote again?</a>
+</div>
 {% endblock %}
 
