@@ -22,9 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '5b@5ct=ztprtezizbm5$3ex%#*kx50-@o@$blo!m!3z6%rf8^d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['sunforge.pythonanywhere.com']
 
 # Application definition
 
