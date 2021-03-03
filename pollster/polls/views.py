@@ -31,18 +31,17 @@ def voting(request):
 def detail(request, question_id):
     ip, is_routable = get_client_ip(request)
     already_visited = False
-    dailyVote = DailyVote.objects.get(client_ip=ip)
-    if not dailyVote:
+
+    try:
+        dailyVote = DailyVote.objects.get(client_ip=ip)
+        if (dailyVote.last_vote_date.date() != datetime.date.today()):
+            dailyVote.last_vote_date = datetime.date.today()
+            dailyVote.save()
+        else:
+            already_visited = True
+    except DailyVote.DoesNotExist:
         new_user_vote = DailyVote(client_ip=ip, last_vote_date=datetime.date.today())
         new_user_vote.save()
-    elif (dailyVote.last_vote_date.date() != datetime.date.today()):
-        dailyVote.last_vote_date = datetime.date.today()
-        dailyVote.save()
-
-    else:
-        already_visited = True
-    print(ip)
-    print(dailyVote)
 
     try:
         question = Question.objects.get(pk=question_id)
